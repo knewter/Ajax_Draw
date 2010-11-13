@@ -5,6 +5,7 @@ gem 'rails', '3.0.1'
 gem 'haml'
 gem 'nifty-generators'
 gem 'jquery-rails'
+gem 'juggernaut'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

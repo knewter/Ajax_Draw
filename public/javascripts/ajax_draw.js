@@ -27,7 +27,7 @@ function ready_handler() {
   start_timer();
 }
 function start_timer() {
-  timer = setInterval( update_canvas_from_remote, 300);
+//  timer = setInterval( update_canvas_from_remote, 300);
 }
 
 function stop_timer() {
@@ -36,12 +36,12 @@ function stop_timer() {
 
 function ajax_draw_mouse_down(e) {
   active = true;
-  log("Mouse Down at " + e.pageX + " : " + e.pageY)
+  //log("Mouse Down at " + e.pageX + " : " + e.pageY)
 }
 
 function ajax_draw_mouse_up(e) {
   active = false;
-  log("Mouse Up at " + e.pageX + " : " + e.pageY)
+  //log("Mouse Up at " + e.pageX + " : " + e.pageY)
 }
 
 function update_canvas_from_remote() {
@@ -79,14 +79,16 @@ function ajax_draw_mouse_over(e) {
     position = $('#ajax_draw_canvas').position();
     x = e.pageX - position.left;
     y = e.pageY - position.top;
-    draw_point(x,y,document.getElementById("color").value);
+    color = document.getElementById("color").value;
+    draw_point(x,y,color);
     $.ajax({
       type: 'POST',
       url: "/draw",
-      data: "x=" + x + "&y=" + y + "&color=" + context.strokeStyle
+      data: "x=" + x + "&y=" + y + "&color=" + color
     });
+    //jug.write({ draw: { x: x, y: y, color: color } }.toJSON)
   } else {
-  log("Active: " + active + " Mouse Over at " + e.pageX + " : " + e.pageY)
+  //log("Active: " + active + " Mouse Over at " + e.pageX + " : " + e.pageY)
   }
 }
 

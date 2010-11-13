@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+      var jug = new Juggernaut;
+      jug.subscribe("/chats", function(data){
+        var li = $("<li />");
+        li.text(data);
+        $("#chats").append(li);
+      });  
+    </script>
+  </head>
+  <body>
+    <ul id='chats'>
+    </ul>
+  </body>
+</html>

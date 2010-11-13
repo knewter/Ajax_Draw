@@ -1,6 +1,5 @@
 !!!
 %html
-
   %head
     %title Ajax Draw
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
@@ -8,6 +7,8 @@
     = stylesheet_link_tag "ajax_draw"
     = javascript_include_tag :defaults
     = javascript_include_tag "ajax_draw"
+    = javascript_include_tag 'json', 'juggernaut'
+    = javascript_include_tag 'http://localhost:8080/socket_io.js'
 
     = csrf_meta_tag
     = yield(:head)
@@ -21,3 +22,26 @@
         %h1= yield(:title)
 
       = yield
+      %textarea#debug
+  :javascript
+     var logElement = document.getElementById("debug");
+     logElement.value = "";
+     var log = function(data){
+       logElement.value += (data + "\n");
+     };
+     
+     var jug = new Juggernaut();
+     
+     jug.on("connect", function(){ log("Connected") });
+     jug.on("disconnect", function(){ log("Disconnected") });
+     jug.on("reconnect", function(){ log("Reconnecting") });
+     
+     log("Subscribing to test");
+     
+     jug.subscribe("test", function(data){
+       log("Got data: x:" + data.draw.x + " y:" + data.draw.y + " color:" + data.draw.color);
+       draw_point(data.draw.x, data.draw.y, data.draw.color);
+     });
+     
+     // Expose for debugging
+     window.jug = jug;
