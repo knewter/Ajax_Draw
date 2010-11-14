@@ -6,6 +6,7 @@ gem 'haml'
 gem 'nifty-generators'
 gem 'jquery-rails'
 gem 'juggernaut'
+gem 'json'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

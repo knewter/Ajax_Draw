@@ -13,8 +13,8 @@ class DrawController < ApplicationController
     d.x     = params["x"]
     d.y     = params["y"]
     d.color = params["color"]
-    #d.save
     Juggernaut.publish('test', d)
+    #d.save
     render :nothing => true
   end
 
